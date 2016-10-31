@@ -6,7 +6,14 @@ const app = express();
 app.set("port", process.env.PORT || 80);
 app.use(express.static(__dirname + "/public"));
 app.engine("handlebars", handlebars({
-  defaultLayout: "main"}));
+  defaultLayout: "main", helpers: {
+    section : function (name, options){
+      if(!this._sections) this._sections = {};
+      this._sections[name] = options.fn(this);
+      return null;
+    }
+  }
+}));
 app.set("view engine", "handlebars");
 
 //home page

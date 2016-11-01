@@ -3,7 +3,7 @@ const handlebars = require("express-handlebars");
 
 const app = express();
 
-app.set("port", process.env.PORT || 80);
+app.set("port", process.env.PORT || 2000);
 app.use(express.static(__dirname + "/public"));
 app.engine("handlebars", handlebars({
   defaultLayout: "main", helpers: {

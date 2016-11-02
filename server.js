@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 });
 //games page
 app.get("/games", (req, res) => {
-  res.render("games");
+  res.render("games",{layout:"games"});
 });
 //account page
 app.get("/account", (req, res) => {

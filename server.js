@@ -20,6 +20,18 @@ app.set("view engine", "handlebars");
 app.get("/", (req, res) => {
   res.render("home");
 });
+//games page
+app.get("/games", (req, res) => {
+  res.render("games");
+});
+//account page
+app.get("/account", (req, res) => {
+  res.render("account");
+});
+//info page
+app.get("/info", (req, res) => {
+  res.render("info");
+});
 
 // 404 page
 app.use((req, res) => {

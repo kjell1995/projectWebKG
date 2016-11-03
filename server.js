@@ -1,10 +1,11 @@
 const express = require("express");
 const handlebars = require("express-handlebars");
+const bodyParser = require("body-parser");
+const formidable = require("formidable");
 
 const app = express();
 
 app.set("port", process.env.PORT || 2000);
-app.use(express.static(__dirname + "/public"));
 app.engine("handlebars", handlebars({
   defaultLayout: "main", helpers: {
     section : function (name, options){
@@ -16,10 +17,30 @@ app.engine("handlebars", handlebars({
 }));
 app.set("view engine", "handlebars");
 
+//middleware
+app.use(express.static(__dirname + "/public"));
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
 //home page
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", {csrf:"CSRF token goes here"});
 });
+
+//processing the post request
+app.post("/process1", (req, res) => {
+  console.log("Form: " + req.query.form);
+  console.log("CSRF: " + req.body._csrf);
+  console.log("Username: " + req.body.username);
+  console.log("Password: " + req.body.password);
+  res.redirect(303, "/");
+});
+
+app.post("/process2", (req, res) => {
+  res.redirect(303, "/signup");
+});
+
 //games page
 app.get("/games", (req, res) => {
   res.render("games",{layout:"games"});
@@ -31,6 +52,10 @@ app.get("/account", (req, res) => {
 //info page
 app.get("/info", (req, res) => {
   res.render("info");
+});
+//signup page
+app.get("/signup", (req, res) => {
+  res.render("signup");
 });
 
 // 404 page

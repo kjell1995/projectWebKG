@@ -14,6 +14,20 @@
    <a href="/account">ACCOUNT</a>
    <a href="/info">INFO</a>
   </nav>
+
+  <form action="process1?form=login" method="post">
+    <input type="hidden" name="_csrf" value="{{csrf}}">
+    <label>Username: </label>
+    <input type="text" id="fieldUsername" name="username">
+    <label>Password: </label>
+    <input type="password" id="fieldPassword" name="password">
+    <button type="submit">Log In</button>
+  </form>
+
+  <form action="process2?form=signup" method="post">
+    <button type="submit">Sign Up</button>
+  </form>
+
   {{{_sections.content}}}
 
   {{{_sections.bottom}}}

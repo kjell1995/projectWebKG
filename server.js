@@ -25,7 +25,7 @@ app.use(bodyParser.json());
 
 //home page
 app.get("/", (req, res) => {
-  res.render("home", {csrf:"CSRF token goes here"});
+  res.render("home");
 });
 
 //processing the post request
@@ -40,6 +40,17 @@ app.post("/process1", (req, res) => {
 app.post("/process2", (req, res) => {
   res.redirect(303, "/signup");
 });
+
+app.post("/process3", (req, res) => {
+  console.log("Form: " + req.query.form);
+  console.log("CSRF: " + req.body._csrf);
+  console.log("Email: " + req.body.Email);
+  console.log("Firstname: " + req.body.Firstname);
+  console.log("Lastname: " + req.body.Lastname);
+  console.log("Username:" + req.body.Username);
+  console.log("Password:" + req.body.pasword);
+  res.redirect(303, "/games");
+})
 
 //games page
 app.get("/games", (req, res) => {

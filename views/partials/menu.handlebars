@@ -1,15 +1,11 @@
-</div class="menu">
+<div class="menu">
 <ul>
  <li><a href="/">HOME</a></li>
  <li><a href="/games">GAMES</a></li>
  <li><a href="/account">ACCOUNT</a></li>
  <li><a href="/info">INFO</a></li>
-
- <li class="right"><form action="process2?form=signup" method="post">
-   <button type="submit">Sign Up</button>
- </form></li>
-
- <li class="right"><form action="process1?form=login" method="post">
+<div class="right">
+ <li><form action="process1?form=login" method="post">
    <input type="hidden" name="_csrf" value="csrf_value">
    <label>Username</label>
    <input type="text" id="fieldUsername" name="username" size="10">
@@ -17,6 +13,9 @@
    <input type="password" id="fieldPassword" name="password" size="10">
    <button type="submit">Log In</button>
  </form></li>
-
+ <li><form action="process2?form=signup" method="post">
+   <button type="submit">Sign Up</button>
+ </form></li>
+</div>
 </ul>
 </div>

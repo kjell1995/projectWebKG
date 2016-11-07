@@ -1,0 +1,39 @@
+body{
+  background: SlateGray;
+  margin:0;
+  overflow-x: hidden;
+}
+
+
+
+.titlebox{
+  position: relative;
+  color: #333;
+  top: 50px;
+  left: 30px;
+}
+
+.outercontent{
+  text-align: center;
+  position: relative;
+  top: 40px;
+}
+
+.content{
+  text-align: left;
+  top: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer{
+  position: absolute;
+  width: auto;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  color: white;
+  background-color: #333;
+  text-align: center;
+}

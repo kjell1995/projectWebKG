@@ -1,0 +1,27 @@
+{{#section "head"}}
+<meta name="robots" content="noindex">
+<link rel="stylesheet" type="text/css" href="css/signup.css" />
+{{/section}}
+
+{{#section "title"}}
+<h1>Sign Up</h1>
+{{/section}}
+
+{{#section "content"}}
+<div class="creataccount">
+<form action="process3?form=login" method="post">
+  <input type="hidden" name="_csrf" value="csrf_value">
+  <label>Email</label><br>
+  <input type="text" id="fieldEmail" name="Email"><br>
+  <label>Firstname</label><br>
+  <input type="text" id="fieldFirstname" name="Firstname"><br>
+  <label>Lastname</label><br>
+  <input type="text" id="fieldLastname" name="Lastname"><br>
+  <label>Username</label><br>
+  <input type="text" id="fieldUsername" name="Username"><br>
+  <label>Password</label><br>
+  <input type="password" id="fieldPassword" name="password"><br>
+  <input type="submit" value="Submit">
+</form>
+</div>
+{{/section}}

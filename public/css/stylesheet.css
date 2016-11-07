@@ -4,12 +4,9 @@ body{
   overflow-x: hidden;
 }
 
-
-
 .titlebox{
   position: relative;
   color: #333;
-  top: 50px;
   left: 30px;
 }
 

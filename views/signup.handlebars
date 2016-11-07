@@ -1,5 +1,6 @@
 {{#section "head"}}
 <meta name="robots" content="noindex">
+<link rel="stylesheet" type="text/css" href="css/signup.css" />
 {{/section}}
 
 {{#section "title"}}
@@ -7,18 +8,20 @@
 {{/section}}
 
 {{#section "content"}}
+<div class="creataccount">
 <form action="process3?form=login" method="post">
   <input type="hidden" name="_csrf" value="csrf_value">
-  <label>Email:     </label>
+  <label>Email</label><br>
   <input type="text" id="fieldEmail" name="Email"><br>
-  <label>Firstname: </label>
+  <label>Firstname</label><br>
   <input type="text" id="fieldFirstname" name="Firstname"><br>
-  <label>Lastname:  </label>
+  <label>Lastname</label><br>
   <input type="text" id="fieldLastname" name="Lastname"><br>
-  <label>Username:  </label>
+  <label>Username</label><br>
   <input type="text" id="fieldUsername" name="Username"><br>
-  <label>Password:  </label>
+  <label>Password</label><br>
   <input type="password" id="fieldPassword" name="password"><br>
-  <button type="submit">Log In</button>
+  <input type="submit" value="Submit">
 </form>
+</div>
 {{/section}}

@@ -23,15 +23,20 @@ body{
   margin-left: auto;
   margin-right: auto;
 }
-
 .footer{
-  position: absolute;
-  width: auto;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  color: white;
-  background-color: #333;
-  text-align: center;
+  visibility: hidden;
+}
+@media all and (min-height:660px ) {
+  .footer{
+    visibility: visible;
+    position: fixed;
+    width: auto;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    color: white;
+    background-color: #333;
+    text-align: center;
+  }
 }

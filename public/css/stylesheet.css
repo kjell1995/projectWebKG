@@ -26,7 +26,7 @@ body{
 .footer{
   visibility: hidden;
 }
-@media all and (min-height:660px ) {
+@media all and (min-height:693px ) {
   .footer{
     visibility: visible;
     position: fixed;

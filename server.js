@@ -23,8 +23,11 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-//home page
 app.get("/", (req, res) => {
+  res.render("restrict",{layout:"restrict"});
+});
+//home page
+app.get("/home", (req, res) => {
   res.render("home");
 });
 
@@ -34,7 +37,7 @@ app.post("/process1", (req, res) => {
   console.log("CSRF: " + req.body._csrf);
   console.log("Username: " + req.body.username);
   console.log("Password: " + req.body.password);
-  res.redirect(303, "/");
+  res.redirect(303, "/home");
 });
 
 app.post("/process2", (req, res) => {
@@ -51,6 +54,42 @@ app.post("/process3", (req, res) => {
   console.log("Password:" + req.body.pasword);
   res.redirect(303, "/games");
 })
+
+app.post("/process4", (req, res) => {
+  console.log("Form: " + req.query.form);
+  console.log("CSRF: " + req.body._csrf);
+  console.log("birthday: " + req.body.dayOB+"/" + req.body.monthOB+"/" + req.body.yearOB);
+
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; //January is 0!
+
+  var yyyy = today.getFullYear();
+  var today = dd+'/'+mm+'/'+yyyy;
+  console.log(today);
+  if(yyyy-req.body.yearOB<18){
+    res.redirect(303,"/404");
+  }
+  else if(yyyy-req.body.yearOB==18){
+    if(mm-req.body.monthOB<0){
+      res.redirect(303,"/404");
+    }
+    else if(mm-req.body.monthOB==0){
+      if(dd-req.body.dayOB<0){
+        res.redirect(303,"/404");
+      }
+      else {
+        res.redirect(303,"/home");
+      }
+    }
+    else{
+      res.redirect(303,"/home");
+    }
+  }
+  else{
+      res.redirect(303,"/home");
+  }
+});
 
 //games page
 app.get("/games", (req, res) => {

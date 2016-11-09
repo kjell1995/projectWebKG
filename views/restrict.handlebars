@@ -1,0 +1,15 @@
+{{#section "content"}}
+
+<p>ENTER YOUR DAY OF BIRTH</p>
+<div class="restrictform">
+<form action="process4?form=checkAge" method="post">
+  <input type="hidden" name="_csrf" value="csrf_value">
+  <input type="number" id="fieldBirthday" name="dayOB" min="1" max="31" value="day"><br>
+  <input type="number" id="fieldBirthday" name="monthOB" min="1" max="12" value="month"><br>
+  <input type="number" id="fieldBirthday" name="yearOB" min="1900" max="3000" value="year"><br>
+  <input type="submit" value="Submit">
+</form>
+</div>
+<p>You should be over the age of 18 to enter this site</p>
+
+{{/section}}

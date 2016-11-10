@@ -97,15 +97,15 @@ app.post("/process4", (req, res) => {
 
 //games page
 app.get("/games", (req, res) => {
-  res.render("games",{layout:"games"});
+  res.render("games",{layout:"games",cuser: req.signedCookies.username});
 });
 //account page
 app.get("/account", (req, res) => {
-  res.render("account");
+  res.render("account",{cuser: req.signedCookies.username});
 });
 //info page
 app.get("/info", (req, res) => {
-  res.render("info");
+  res.render("info",{cuser: req.signedCookies.username});
 });
 //signup page
 app.get("/signup", (req, res) => {

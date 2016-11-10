@@ -1,21 +1,84 @@
 <div class="menu">
 <ul>
- <li><a href="/">HOME</a></li>
+ <li><a href="/home">HOME</a></li>
  <li><a href="/games">GAMES</a></li>
  <li><a href="/account">ACCOUNT</a></li>
  <li><a href="/info">INFO</a></li>
-<div class="right">
- <li><form action="process1?form=login" method="post">
-   <input type="hidden" name="_csrf" value="csrf_value">
-   <label>Username</label>
-   <input type="text" id="fieldUsername" name="username" size="10">
-   <label>Password</label>
-   <input type="password" id="fieldPassword" name="password" size="10">
-   <button type="submit">Log In</button>
- </form></li>
- <li><form action="process2?form=signup" method="post">
-   <button type="submit">Sign Up</button>
- </form></li>
+<div class="right" id="loginbar" >
+
 </div>
 </ul>
 </div>
+<script>
+var element = document.getElementById("loginbar");
+
+if("{{cuser}}" !=""){
+  var li0 = document.createElement("li");
+  var p = document.createElement("p");
+  p.innerHTML="Hallo {{cuser}}, welkom terug!";
+  li0.appendChild(p);
+  element.appendChild(li0);
+}
+else{
+  var li=document.createElement("li");
+
+  var f= document.createElement("form");
+  f.setAttribute('method', "post");
+  f.setAttribute('action',"process1?form=login");
+
+  var i = document.createElement("input");
+  i.setAttribute('type', "hidden");
+  i.setAttribute('name',"_csrf");
+  i.setAttribute('value', "csrf_value");
+
+  var l = document.createElement("label");
+  l.innerHTML="Username"
+
+  var j = document.createElement("input");
+  j.setAttribute('type', "text");
+  j.setAttribute('name',"username");
+  j.setAttribute('size', "10");
+
+  var m = document.createElement("label");
+  m.innerHTML="Password"
+
+  var k = document.createElement("input");
+  k.setAttribute('type', "password");
+  k.setAttribute('name',"password");
+  k.setAttribute('size', "10");
+
+  var n = document.createElement("button");
+  n.setAttribute('type', "submit");
+  n.innerHTML="Log in"
+
+  f.appendChild(i);
+  f.appendChild(l);
+  f.appendChild(j);
+  f.appendChild(m);
+  f.appendChild(k);
+  f.appendChild(n);
+
+  li.appendChild(f);
+  element.appendChild(li);
+
+var li2=document.createElement("li");
+var f2= document.createElement("form");
+f2.setAttribute('method', "post");
+f2.setAttribute('action',"process2?form=signup");
+
+var i2 = document.createElement("input");
+i2.setAttribute('type', "hidden");
+i2.setAttribute('name',"_csrf");
+i2.setAttribute('value', "csrf_value");
+
+var n2 = document.createElement("button");
+n2.setAttribute('type', "submit");
+n2.innerHTML="Sign up";
+
+f2.appendChild(i2);
+f2.appendChild(n2);
+li2.appendChild(f2);
+element.appendChild(li2);
+}
+
+</script>

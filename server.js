@@ -2,6 +2,7 @@ const express = require("express");
 const handlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
 const formidable = require("formidable");
+const credentials = require("./credentials.js");
 
 const app = express();
 
@@ -23,20 +24,25 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
+app.use(require("cookie-parser")(credentials.cookieSecret));
+
 app.get("/", (req, res) => {
   res.render("restrict",{layout:"restrict"});
 });
 //home page
 app.get("/home", (req, res) => {
-  res.render("home");
+  res.render("home",{cuser: req.signedCookies.username});
 });
 
 //processing the post request
 app.post("/process1", (req, res) => {
+  res.cookie("username", req.body.username, { signed: true });
+  res.cookie("password", req.body.password, { signed: true });
   console.log("Form: " + req.query.form);
   console.log("CSRF: " + req.body._csrf);
   console.log("Username: " + req.body.username);
   console.log("Password: " + req.body.password);
+
   res.redirect(303, "/home");
 });
 

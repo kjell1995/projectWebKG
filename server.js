@@ -63,20 +63,18 @@ app.post("/process4", (req, res) => {
   var today = new Date();
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!
-
   var yyyy = today.getFullYear();
-  var today = dd+'/'+mm+'/'+yyyy;
-  console.log(today);
+
   if(yyyy-req.body.yearOB<18){
-    res.redirect(303,"/404");
+    res.redirect(303,"/samson");
   }
   else if(yyyy-req.body.yearOB==18){
     if(mm-req.body.monthOB<0){
-      res.redirect(303,"/404");
+      res.redirect(303,"/samson");
     }
     else if(mm-req.body.monthOB==0){
       if(dd-req.body.dayOB<0){
-        res.redirect(303,"/404");
+        res.redirect(303,"/samson");
       }
       else {
         res.redirect(303,"/home");
@@ -106,6 +104,10 @@ app.get("/info", (req, res) => {
 //signup page
 app.get("/signup", (req, res) => {
   res.render("signup");
+});
+//samson page
+app.get("/samson", (req, res) => {
+  res.render("samson",{layout:"restrict"});
 });
 
 // 404 page

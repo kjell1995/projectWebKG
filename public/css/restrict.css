@@ -1,8 +1,34 @@
-.restrictform{
-  display: flex;
-  text-align: center;
-
+.outercontent{
+  display: -webkit-box;
+  background-color: #2d3838;
+  position: absolute;
+  top:0px;
+  bottom: 0px;
+  right:0px;
+  left: 0px;
 }
-body{
+.content{
   text-align: center;
+  margin-left: 40%;
+  margin-right: 40%;
+  margin-top: 10%;
+  margin-bottom: 25%;
+}
+center{
+
+  background-color: slategray;
+  border-style: dashed;
+  border-color: #313131;
+}
+input[type="submit"] {
+    width: 83%;
+    padding: 3%;
+    margin: 0px;
+}
+
+input#fieldBirthday {
+    width: 75%;
+    padding: 3%;
+    margin: 0px;
+    text-align: center;
 }

@@ -40,3 +40,9 @@ body{
     text-align: center;
   }
 }
+@media all and (max-width:810px){
+  img{
+width: 100%;
+height: 100%;
+}
+}

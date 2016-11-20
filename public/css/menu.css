@@ -2,7 +2,7 @@ form{
   padding:14px 2px 2px 3px;
 }
 
-ul {
+ul#menuul {
     list-style-type: none;
     overflow: hidden;
     background-color: #333;
@@ -10,18 +10,21 @@ ul {
     margin:0;
 }
 
-li {
+li#menuli {
     overflow: hidden;
-    display: flex;
+    display: inline-flex;
     color:white;
     float: left;
 }
 
 .right{
-  float: left;
+  display: flex;
+  color: white;
 }
 @media all and (min-width: 865px){
-  .right{float: right;}
+  .right{float: right;
+          display: flex;
+        color: white;}
 }
 
 li a {

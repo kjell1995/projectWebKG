@@ -7,9 +7,10 @@
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
   <link rel="stylesheet" type="text/css" href="css/menu.css" />
+  <link rel="stylesheet" type="text/css" href="css/chatStyle.css" />
   {{{_sections.head}}}
 </head>
-<BODY OnLoad="setBj()">
+<body>
 
   {{> menu}}
 
@@ -19,6 +20,7 @@
 
   <div class="outercontent">
   <div class="content">
+    {{> chat}}
     {{{_sections.content}}}
   </div></div>
 

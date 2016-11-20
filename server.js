@@ -6,6 +6,9 @@ const credentials = require("./credentials.js");
 
 const app = express();
 
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
 app.set("port", process.env.PORT || 2000);
 app.engine("handlebars", handlebars({
   defaultLayout: "main", helpers: {
@@ -25,14 +28,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use(require("cookie-parser")(credentials.cookieSecret));
-
-app.get("/", (req, res) => {
-  res.render("restrict",{layout:"restrict"});
-});
-//home page
-app.get("/home", (req, res) => {
-  res.render("home",{cuser: req.signedCookies.username});
-});
 
 //processing the post request
 app.post("/process1", (req, res) => {
@@ -95,6 +90,35 @@ app.post("/process4", (req, res) => {
   }
 });
 
+//socket functions for chat possibility
+var users=0;
+io.sockets.on('connection', (socket)=>{
+  console.log('a new user connected');
+  users++;
+  io.emit('NrOfUsrs',users);
+
+  socket.on('nickname', (data)=>{
+    socket.nickname = data;
+  });
+  socket.on('chat message', (message)=> {
+    const newMsg = {nick: socket.nickname, msg: message};
+    io.emit('chat message',newMsg);
+  });
+  socket.on('disconnect',()=>{
+    console.log(socket.nickname + ' disconnected');
+    users--;
+    io.emit('disconnection', socket.nickname);
+    io.emit('NrOfUsrs',users);
+  });
+});
+//start page
+app.get("/", (req, res) => {
+  res.render("restrict",{layout:"restrict"});
+});
+//home page
+app.get("/home", (req, res) => {
+  res.render("home",{cuser: req.signedCookies.username});
+});
 //games page
 app.get("/games", (req, res) => {
   res.render("games",{layout:"games",cuser: req.signedCookies.username});
@@ -128,7 +152,11 @@ app.use((err, req, res, next) => {
   res.status(500);
   res.render("500");
 });
-
+/*
 app.listen(app.get("port"), () => {
+  console.log("Server started on http://localhost: " + app.get("port"));
+});
+*/
+http.listen(app.get("port"), () => {
   console.log("Server started on http://localhost: " + app.get("port"));
 });

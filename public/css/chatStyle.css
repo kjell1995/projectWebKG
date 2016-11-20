@@ -1,0 +1,20 @@
+li.me{
+  background-color: #333;
+  color: white;
+  direction: rtl;
+  text-align: justify;
+  font-size: larger;
+}
+
+ li.others{
+   background-color: SlateGray;
+  text-align: : left;
+  font-size: larger;
+}
+ul{
+  list-style-type: none;
+}
+p#users{
+  color: #ab9898;
+  font-size: smaller;
+}

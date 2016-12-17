@@ -6,6 +6,18 @@ const credentials = require("./credentials.js");
 
 const app = express();
 
+//setup db connection
+const user = require("./models/user.js");
+const dburl = credentials.connectionString;
+const mongoose = require("mongoose");
+const opts = {
+  server: {
+    socketOptions: {keepAlive: 1}
+  }
+};
+
+mongoose.connect(dburl, opts);
+
 app.set("port", process.env.PORT || 2000);
 app.engine("handlebars", handlebars({
   defaultLayout: "main", helpers: {

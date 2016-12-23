@@ -25,16 +25,10 @@ if("{{cuser}}" !=""){
   f3.setAttribute('method', "post");
   f3.setAttribute('action',"process5?form=signup");
 
-  var i3 = document.createElement("input");
-  i3.setAttribute('type', "hidden");
-  i3.setAttribute('name',"_csrf");
-  i3.setAttribute('value', "csrf_value");
-
   var n3 = document.createElement("button");
   n3.setAttribute('type', "submit");
   n3.innerHTML="Log Out";
 
-  f3.appendChild(i3);
   f3.appendChild(n3);
   li3.appendChild(f3);
   element.appendChild(li3);

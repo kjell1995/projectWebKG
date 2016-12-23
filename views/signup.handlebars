@@ -9,19 +9,23 @@
 
 {{#section "content"}}
 <div class="creataccount">
-<form action="process3?form=login" method="post">
+<form name="signupform" action="process3?form=login" onsubmit="return validateForm()" method="post">
+  <div id="hiddenMessage"></div>
   <input type="hidden" name="_csrf" value="csrf_value">
-  <label>Email</label><br>
+  <label id="labelEmail">Email</label><br>
   <input type="text" id="fieldEmail" name="Email"><br>
-  <label>Firstname</label><br>
+  <label id="labelFirstname">Firstname</label><br>
   <input type="text" id="fieldFirstname" name="Firstname"><br>
-  <label>Lastname</label><br>
+  <label id="labelLastname">Lastname</label><br>
   <input type="text" id="fieldLastname" name="Lastname"><br>
-  <label>Username</label><br>
+  <label id="labelUsername">Username</label><br>
   <input type="text" id="fieldUsername" name="Username"><br>
-  <label>Password</label><br>
+  <label id="labelPassword">Password</label><br>
   <input type="password" id="fieldPassword" name="password"><br>
+  <label id="labelPassword2">Confirm Password</label><br>
+  <input type="password" id="fieldPassword2" name="password2"><br>
   <input type="submit" value="Submit">
 </form>
 </div>
+<script type="text/javascript" src="scripts/validate.js"></script>
 {{/section}}

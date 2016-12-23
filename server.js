@@ -127,7 +127,10 @@ app.post("/process4", (req, res) => {
   }
 });
 
-
+app.post("/process5", (req, res) => {
+  res.clearCookie("username");
+  res.redirect(303,"/home");
+});
 
 //games page
 app.get("/games", (req, res) => {

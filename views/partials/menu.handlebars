@@ -18,8 +18,29 @@ if("{{cuser}}" !=""){
   p.innerHTML="Hallo {{cuser}}, welkom terug!";
   li0.appendChild(p);
   element.appendChild(li0);
+
+  // sign up button
+  var li3=document.createElement("li");
+  var f3= document.createElement("form");
+  f3.setAttribute('method', "post");
+  f3.setAttribute('action',"process5?form=signup");
+
+  var i3 = document.createElement("input");
+  i3.setAttribute('type', "hidden");
+  i3.setAttribute('name',"_csrf");
+  i3.setAttribute('value', "csrf_value");
+
+  var n3 = document.createElement("button");
+  n3.setAttribute('type', "submit");
+  n3.innerHTML="Log Out";
+
+  f3.appendChild(i3);
+  f3.appendChild(n3);
+  li3.appendChild(f3);
+  element.appendChild(li3);
 }
 else{
+  //login form
   var li=document.createElement("li");
 
   var f= document.createElement("form");
@@ -33,7 +54,7 @@ else{
 
   var l = document.createElement("label");
   l.innerHTML="Username"
-
+  //username input field
   var j = document.createElement("input");
   j.setAttribute('type', "text");
   j.setAttribute('name',"username");
@@ -41,12 +62,12 @@ else{
 
   var m = document.createElement("label");
   m.innerHTML="Password"
-
+  //password input field
   var k = document.createElement("input");
   k.setAttribute('type', "password");
   k.setAttribute('name',"password");
   k.setAttribute('size', "10");
-
+  //submit button
   var n = document.createElement("button");
   n.setAttribute('type', "submit");
   n.innerHTML="Log in"
@@ -61,24 +82,25 @@ else{
   li.appendChild(f);
   element.appendChild(li);
 
-var li2=document.createElement("li");
-var f2= document.createElement("form");
-f2.setAttribute('method', "post");
-f2.setAttribute('action',"process2?form=signup");
+  // sign up button
+  var li2=document.createElement("li");
+  var f2= document.createElement("form");
+  f2.setAttribute('method', "post");
+  f2.setAttribute('action',"process2?form=signup");
 
-var i2 = document.createElement("input");
-i2.setAttribute('type', "hidden");
-i2.setAttribute('name',"_csrf");
-i2.setAttribute('value', "csrf_value");
+  var i2 = document.createElement("input");
+  i2.setAttribute('type', "hidden");
+  i2.setAttribute('name',"_csrf");
+  i2.setAttribute('value', "csrf_value");
 
-var n2 = document.createElement("button");
-n2.setAttribute('type', "submit");
-n2.innerHTML="Sign up";
+  var n2 = document.createElement("button");
+  n2.setAttribute('type', "submit");
+  n2.innerHTML="Sign up";
 
-f2.appendChild(i2);
-f2.appendChild(n2);
-li2.appendChild(f2);
-element.appendChild(li2);
+  f2.appendChild(i2);
+  f2.appendChild(n2);
+  li2.appendChild(f2);
+  element.appendChild(li2);
 }
 
 </script>

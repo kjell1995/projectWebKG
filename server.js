@@ -3,6 +3,7 @@ const handlebars = require("express-handlebars");
 const bodyParser = require("body-parser");
 const formidable = require("formidable");
 const credentials = require("./credentials.js");
+const passwordHash = require("password-hash");
 
 const app = express();
 
@@ -48,14 +49,32 @@ app.get("/home", (req, res) => {
 
 //processing the post request
 app.post("/process1", (req, res) => {
-  res.cookie("username", req.body.username, { signed: true });
-  res.cookie("password", req.body.password, { signed: true });
-  console.log("Form: " + req.query.form);
-  console.log("CSRF: " + req.body._csrf);
-  console.log("Username: " + req.body.username);
-  console.log("Password: " + req.body.password);
 
-  res.redirect(303, "/home");
+  var x = 0;
+
+   user.count({Username: req.body.username}, (err, count) => {
+    if (err) return handleError(err);
+    x = count;
+
+    if(x == 1){
+        user.findOne({Username: req.body.username}, (err, users) => {
+
+          var check = passwordHash.verify( req.body.password, users.Password.toString());
+
+          if(check === true) {
+            res.cookie("username", req.body.username, { signed: true});
+            res.redirect(303, "/games");
+
+          }
+          else{
+            res.redirect(303, "/signin");
+          }
+        });
+   }
+   else{
+     res.redirect(303, "/signin");
+   }
+  });
 });
 
 app.post("/process2", (req, res) => {
@@ -63,13 +82,14 @@ app.post("/process2", (req, res) => {
 });
 
 app.post("/process3", (req, res) => {
-  console.log("Form: " + req.query.form);
-  console.log("CSRF: " + req.body._csrf);
-  console.log("Email: " + req.body.Email);
-  console.log("Firstname: " + req.body.Firstname);
-  console.log("Lastname: " + req.body.Lastname);
-  console.log("Username:" + req.body.Username);
-  console.log("Password:" + req.body.pasword);
+
+  new user({Email: req.body.Email,
+            Firstname: req.body.Firstname,
+            Lastname: req.body.Lastname,
+            Username: req.body.Username,
+            Password: passwordHash.generate(req.body.password) }).save();
+
+  res.cookie("username", req.body.Username, { signed: true});
   res.redirect(303, "/games");
 })
 
@@ -107,6 +127,8 @@ app.post("/process4", (req, res) => {
   }
 });
 
+
+
 //games page
 app.get("/games", (req, res) => {
   res.render("games",{layout:"games",cuser: req.signedCookies.username});
@@ -122,6 +144,10 @@ app.get("/info", (req, res) => {
 //signup page
 app.get("/signup", (req, res) => {
   res.render("signup");
+});
+//signin page
+app.get("/signin", (req, res) => {
+  res.render("signin",{cuser: req.signedCookies.username});
 });
 //samson page
 app.get("/samson", (req, res) => {

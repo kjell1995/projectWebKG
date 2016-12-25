@@ -36,3 +36,8 @@
 .creataccount input[type=submit]:hover {
     background-color: #111;
 }
+
+#hiddenMessage{
+  color: white;
+  font-size: large;
+}

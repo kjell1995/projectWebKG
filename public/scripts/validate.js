@@ -70,10 +70,7 @@ function validateForm() {
     if(check != 0){
       document.getElementById('fieldPassword').value = "";
       document.getElementById('fieldPassword2').value = "";
-      var x = document.getElementById('hiddenMessage');
-      x.innerHTML = message + "<br>";
-      x.style.color = "white";
-      x.style.fontSize = "large";
+      var x = document.getElementById('hiddenMessage').innerHTML = message + "<br>";
       alert("Please fill in all the fields correct!");
       return false;
     }

@@ -81,16 +81,29 @@ app.post("/process2", (req, res) => {
   res.redirect(303, "/signup");
 });
 
+var message_signup = "";
+
 app.post("/process3", (req, res) => {
 
-  new user({Email: req.body.Email,
-            Firstname: req.body.Firstname,
-            Lastname: req.body.Lastname,
-            Username: req.body.Username,
-            Password: passwordHash.generate(req.body.password) }).save();
+  user.count({Username: req.body.Username}, (err, count) => {
+    var x = count;
 
-  res.cookie("username", req.body.Username, { signed: true});
-  res.redirect(303, "/games");
+    if(x == 0){
+      new user({Email: req.body.Email,
+                Firstname: req.body.Firstname,
+                Lastname: req.body.Lastname,
+                Username: req.body.Username,
+                Password: passwordHash.generate(req.body.password) }).save();
+
+      res.cookie("username", req.body.Username, { signed: true});
+      res.redirect(303, "/games");
+    }
+    else{
+      message_signup = "Username is already in use!";
+      res.redirect(303, "/signup");
+    }
+  });
+
 })
 
 app.post("/process4", (req, res) => {
@@ -146,7 +159,8 @@ app.get("/info", (req, res) => {
 });
 //signup page
 app.get("/signup", (req, res) => {
-  res.render("signup");
+  res.render("signup",{message: message_signup});
+  message_signup = "";
 });
 //signin page
 app.get("/signin", (req, res) => {

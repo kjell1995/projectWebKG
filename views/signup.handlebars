@@ -8,9 +8,10 @@
 {{/section}}
 
 {{#section "content"}}
+
 <div class="creataccount">
 <form name="signupform" action="process3?form=login" onsubmit="return validateForm()" method="post">
-  <div id="hiddenMessage"></div>
+  <div id="hiddenMessage">{{message}}<br><br></div>
   <input type="hidden" name="_csrf" value="csrf_value">
   <label id="labelEmail">Email</label><br>
   <input type="text" id="fieldEmail" name="Email"><br>

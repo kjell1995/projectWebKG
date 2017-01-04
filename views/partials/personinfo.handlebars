@@ -49,7 +49,9 @@
 </div>
 <div id="statistics" class="tabcontent">
   <h3>teststatic</h3>
-  <div id="name"></div>
+  <div id="name">
+    <h4>{{cuser}} ({{cfirst}} {{clast}}) </h4>
+  </div>
   <div id="games"></div>
 </div>
 <script type="text/javascript" src="scripts/validate.js"></script>
@@ -79,6 +81,7 @@ const lastname ="{{clast}}";
 const email ="{{cemail}}";
 
 if("{{cuser}}" != ''){
+  //person
   var usernameEl = document.getElementById("usernameLabel");
   usernameEl.innerHTML=username;
   var firstnameEl = document.getElementById("firstnameLabel");
@@ -87,7 +90,32 @@ if("{{cuser}}" != ''){
   lastnameEl.innerHTML=lastname;
   var emailEl = document.getElementById("emailLabel");
   emailEl.innerHTML=email;
-  //var games.
+  //Statistics.
+  var gamesEl = document.getElementById("games");
+  var guessGame = document.createElement("ul");
+  guessGame.innerHTML="GuessGame";
+  var guessGameWins = document.createElement("ul");
+  guessGameWins.innerHTML="Wins: {{cguessw}}";
+  var guessGameloss = document.createElement("ul");
+  guessGameloss.innerHTML="Losses: {{cguessl}}";
+  var guessGameTotal = document.createElement("ul");
+  guessGameTotal.innerHTML="Total Games: {{cguesst}}";
+  guessGame.appendChild(guessGameWins);
+  guessGame.appendChild(guessGameloss);
+  guessGame.appendChild(guessGameTotal);
+  gamesEl.appendChild(guessGame);
 
+  var diceGame = document.createElement("ul");
+  diceGame.innerHTML="diceGame";
+  var diceGameMax = document.createElement("ul");
+  diceGameMax.innerHTML="Max: {{cdicemax}}";
+  var diceGameMin = document.createElement("ul");
+  diceGameMin.innerHTML="Min: {{cdicemin}}";
+  var diceGameTotal = document.createElement("ul");
+  diceGameTotal.innerHTML="Total Games: {{cdicet}}";
+  diceGame.appendChild(diceGameMax);
+  diceGame.appendChild(diceGameMin);
+  diceGame.appendChild(diceGameTotal);
+  gamesEl.appendChild(diceGame);
 }
 </script>

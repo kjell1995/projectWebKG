@@ -62,6 +62,12 @@ app.post("/process1", (req, res) => {
             res.cookie("firstname",users.Firstname.toString(), { signed: true});
             res.cookie("lastname", users.Lastname.toString(), { signed: true});
             res.cookie("email", users.Email.toString(), { signed: true});
+            res.cookie("guesswin","0", {signed:true});
+            res.cookie("guessloss","0", {signed:true});
+            res.cookie("guesstot","0", {signed:true});
+            res.cookie("dicemax","0", {signed:true});
+            res.cookie("dicemin","1000", {signed:true});
+            res.cookie("dicetot","0", {signed:true});
             res.redirect(303, "/games");
 
           }
@@ -98,6 +104,12 @@ app.post("/process3", (req, res) => {
       res.cookie("firstname", req.body.Firstname, { signed: true});
       res.cookie("lastname", req.body.Lastname, { signed: true});
       res.cookie("email", req.body.Email, { signed: true});
+      res.cookie("guesswin","0", {signed:true});
+      res.cookie("guessloss","0", {signed:true});
+      res.cookie("guesstot","0", {signed:true});
+      res.cookie("dicemax","0", {signed:true});
+      res.cookie("dicemin","1000", {signed:true});
+      res.cookie("dicetot","0", {signed:true});
       res.redirect(303, "/games");
     }
     else{ // tell user to choose other username
@@ -145,9 +157,17 @@ app.post("/process4", (req, res) => {
 
 app.post("/process5", (req, res) => {
   res.clearCookie("username");
+  res.clearCookie("firstname");
+  res.clearCookie("lastname");
+  res.clearCookie("guesswin");
+  res.clearCookie("guessloss");
+  res.clearCookie("guesstot");
+  res.clearCookie("dicemax");
+  res.clearCookie("dicemin");
+  res.clearCookie("dicetot");
   res.redirect(303,"/home");
 });
-
+//changing database information
 app.post("/process6", (req, res) => {
 
   user.count({Username: req.body.Username}, (err, count) => {
@@ -164,10 +184,38 @@ app.post("/process6", (req, res) => {
           res.cookie("firstname", req.body.Firstname, { signed: true});
           res.cookie("lastname", req.body.Lastname, { signed: true});
           res.cookie("email", req.body.Email, { signed: true});
+          res.cookie("guesswin","0", {signed:true});
+          res.cookie("guessloss","0", {signed:true});
+          res.cookie("guesstot","0", {signed:true});
+          res.cookie("dicemax","0", {signed:true});
+          res.cookie("dicemin","1000", {signed:true});
+          res.cookie("dicetot","0", {signed:true});
           res.redirect("/account");
         }
   });
 });
+
+//refres cookies after dicegame ( not working)
+app.post("/process8", (req, res) => {
+    if(req.signedCookies.username != ''){
+      var text = req.body.text;
+          if(text > req.signedCookies.dicemax){
+            res.cookie("dicemax",req.body.text, {signed:true});
+            res.cookie("dicetot",req.signedCookies.dicetot++, {signed:true});
+          }
+          if(text < req.signedCookies.dicemin){
+            res.cookie("dicemin",req.body.text, {signed:true});
+            res.cookie("dicetot",req.signedCookies.dicetot++, {signed:true});
+          }
+          if(text > req.signedCookies.dicemin&&text < req.signedCookies.dicemax){
+            res.cookie("dicetot",req.signedCookies.dicetot++, {signed:true});
+          }
+          res.redirect("/games");
+        }
+      else{res.redirect("/games");}
+});
+
+
 
 //socket functions for chat possibility
 var users=0;
@@ -208,7 +256,10 @@ app.get("/games", (req, res) => {
 
 //account page
 app.get("/account", (req, res) => {
-  res.render("account",{cuser: req.signedCookies.username, cfirst: req.signedCookies.firstname,clast:req.signedCookies.lastname,cemail:req.signedCookies.email,layout:"persons"});
+  res.render("account",{cuser: req.signedCookies.username, cfirst: req.signedCookies.firstname,clast:req.signedCookies.lastname,cemail:req.signedCookies.email,
+    cguessw:req.signedCookies.guesswin,cguessl:req.signedCookies.guessloss,cguesst:req.signedCookies.guesstot ,cdicemax:req.signedCookies.dicemax,cdicemin:req.signedCookies.dicemin,
+    cdicet:req.signedCookies.dicetot, layout:"persons"});
+
 });
 
 //info page

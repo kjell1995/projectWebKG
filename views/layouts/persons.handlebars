@@ -7,8 +7,7 @@
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="css/stylesheet.css" />
   <link rel="stylesheet" type="text/css" href="css/menu.css" />
-  <link rel="stylesheet" type="text/css" href="css/chatStyle.css" />
-  <link rel="stylesheet" type="text/css" href="css/games.css"/>
+  <link rel="stylesheet" type="text/css" href="css/personStyle.css" />
   {{{_sections.head}}}
 </head>
 <body>
@@ -20,9 +19,9 @@
   </div>
 
   <div class="outercontent">
-  <div class="content">    
+  <div class="content">
+    {{> personinfo}}
     {{{_sections.content}}}
-    {{> chat}}
   </div></div>
 
   {{{_sections.bottom}}}

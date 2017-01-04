@@ -2,15 +2,15 @@ li.me{
   background-color: #333;
   color: white;
   direction: rtl;
-  text-align: justify;
+  text-align: left;
   font-size: larger;
 }
 
  li.others{
-   background-color: SlateGray;
+  background-color: SlateGray;
   text-align: : left;
   font-size: larger;
-}
+  }
 ul{
   list-style-type: none;
 }

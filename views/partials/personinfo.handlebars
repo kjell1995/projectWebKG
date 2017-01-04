@@ -1,0 +1,93 @@
+<div class='person'>
+<ul class="tab">
+  <li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event,'info')" id="defaultOpen">Person</a></li>
+  <li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event,'statistics')">Statistics</a></li>
+</ul>
+
+<div id="info" class="tabcontent">
+  <h3>testing</h3>
+  <div id="Username"></div>
+  <ul>
+  <label>Username:<label>
+  <label id="usernameLabel"/>
+  </ul>
+  <div id="Firstname"></div>
+  <ul>
+  <label>Firstname:<label>
+  <label id="firstnameLabel"/>
+  </ul>
+  <div id="Lastname"></div>
+  <ul>
+  <label>Lastname:<label>
+  <label id="lastnameLabel"/>
+  </ul>
+  <div id="Email"></div>
+  <ul>
+  <label>Email:<label>
+  <label id="emailLabel"/>
+  </ul>
+  <div id="Password"></div>
+  <ul>
+  <form name="signupform" action="process6?form=changepass" onsubmit="return validateForm()" method="post">
+    <div id="hiddenMessage">{{message}}<br><br></div>
+    <input type="hidden" name="_csrf" value="csrf_value">
+    <label id="labelEmail">Email</label><br>
+    <input type="text" id="fieldEmail" name="Email" value="{{cemail}}"><br>
+    <label id="labelFirstname">Firstname</label><br>
+    <input type="text" id="fieldFirstname" name="Firstname" value="{{cfirst}}"><br>
+    <label id="labelLastname">Lastname</label><br>
+    <input type="text" id="fieldLastname" name="Lastname" value="{{clast}}"><br>
+    <label id="labelUsername">Username</label><br>
+    <input type="text" id="fieldUsername" name="Username" value="{{cuser}}"><br>
+    <label id="labelPassword">Password</label><br>
+    <input type="password" id="fieldPassword" name="password"><br>
+    <label id="labelPassword2">Confirm Password</label><br>
+    <input type="password" id="fieldPassword2" name="password2"><br>
+    <input type="submit" value="change">
+  </form>
+  </ul>
+</div>
+<div id="statistics" class="tabcontent">
+  <h3>teststatic</h3>
+  <div id="name"></div>
+  <div id="games"></div>
+</div>
+<script type="text/javascript" src="scripts/validate.js"></script>
+<script>
+function openTab(evt, tabname) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabname).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+<script>
+
+const username = "{{cuser}}";
+const firstname = "{{cfirst}}";
+const lastname ="{{clast}}";
+const email ="{{cemail}}";
+
+if("{{cuser}}" != ''){
+  var usernameEl = document.getElementById("usernameLabel");
+  usernameEl.innerHTML=username;
+  var firstnameEl = document.getElementById("firstnameLabel");
+  firstnameEl.innerHTML=firstname;
+  var lastnameEl = document.getElementById("lastnameLabel");
+  lastnameEl.innerHTML=lastname;
+  var emailEl = document.getElementById("emailLabel");
+  emailEl.innerHTML=email;
+  //var games.
+
+}
+</script>

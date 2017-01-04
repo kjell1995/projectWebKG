@@ -58,7 +58,10 @@ app.post("/process1", (req, res) => {
           var check = passwordHash.verify( req.body.password, users.Password.toString());
 
           if(check === true) {
-            res.cookie("username", req.body.username, { signed: true});
+            res.cookie("username", req.body.username.toString(), { signed: true});
+            res.cookie("firstname",users.Firstname.toString(), { signed: true});
+            res.cookie("lastname", users.Lastname.toString(), { signed: true});
+            res.cookie("email", users.Email.toString(), { signed: true});
             res.redirect(303, "/games");
 
           }
@@ -91,8 +94,10 @@ app.post("/process3", (req, res) => {
                 Lastname: req.body.Lastname,
                 Username: req.body.Username,
                 Password: passwordHash.generate(req.body.password) }).save();
-
       res.cookie("username", req.body.Username, { signed: true});
+      res.cookie("firstname", req.body.Firstname, { signed: true});
+      res.cookie("lastname", req.body.Lastname, { signed: true});
+      res.cookie("email", req.body.Email, { signed: true});
       res.redirect(303, "/games");
     }
     else{ // tell user to choose other username
@@ -101,7 +106,7 @@ app.post("/process3", (req, res) => {
     }
   });
 
-})
+});
 
 // process befor entering the page
 app.post("/process4", (req, res) => {
@@ -143,6 +148,27 @@ app.post("/process5", (req, res) => {
   res.redirect(303,"/home");
 });
 
+app.post("/process6", (req, res) => {
+
+  user.count({Username: req.body.Username}, (err, count) => {
+    if (err) return handleError(err);
+    x = count;
+
+    if(x == 1){ // if there is one user that match, check if password is correct
+      //contains error because the database isn't changed at all. ( found http://mongoosejs.com/docs/api.html#model_Model.update )
+        user.findOneAndUpdate({Username: req.body.username},{Password: passwordHash.generate(req.body.password)}, {overwrite: true}, (err,raw)=>{
+            if (err) return handleError(err);
+            console.log('The raw response from Mongo was ', raw);
+        });
+          res.cookie("username", req.body.Username, { signed: true});
+          res.cookie("firstname", req.body.Firstname, { signed: true});
+          res.cookie("lastname", req.body.Lastname, { signed: true});
+          res.cookie("email", req.body.Email, { signed: true});
+          res.redirect("/account");
+        }
+  });
+});
+
 //socket functions for chat possibility
 var users=0;
 io.sockets.on('connection', (socket)=>{
@@ -182,7 +208,7 @@ app.get("/games", (req, res) => {
 
 //account page
 app.get("/account", (req, res) => {
-  res.render("account",{cuser: req.signedCookies.username});
+  res.render("account",{cuser: req.signedCookies.username, cfirst: req.signedCookies.firstname,clast:req.signedCookies.lastname,cemail:req.signedCookies.email,layout:"persons"});
 });
 
 //info page
